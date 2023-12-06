@@ -1,0 +1,15 @@
+---
+- name: Install Java
+  hosts: MasterNode1
+  become: yes
+
+  tasks:
+    - name: Update apt package cache (for Ubuntu)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Install OpenJDK 11
+      package:
+        name: openjdk-11-jdk
+        state: present
